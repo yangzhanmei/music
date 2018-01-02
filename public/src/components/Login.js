@@ -16,7 +16,7 @@ export default class Login extends Component {
     render() {
         return (
             <View>
-                <Text>{this.props.hello}</Text>
+                <Text>{this.props.value}</Text>
             </View>
         );
     }
