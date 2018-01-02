@@ -9,7 +9,7 @@ import {
     Alert
 } from 'react-native';
 
-export default class Login extends Component {
+export default class Register extends Component {
 
     render() {
         const {navigate} = this.props.navigation;
@@ -18,14 +18,15 @@ export default class Login extends Component {
             <View style={styles.container}>
                 <TextInput style={{height: 40}} placeholder="用户名"/>
                 <TextInput style={{height: 40}} placeholder="密码"/>
-                <Button color='#d74047' title="登录" onPress={() => {
-                    // navigate('HomePage');
-                }}/>
+                <TextInput style={{height: 40}} placeholder="确认密码"/>
+                <Button onPress={() => {
+                    navigate('Login');
+                }}
+                        color='#d74047' title="注册"/>
                 <View style={styles.flexSpace}>
-                    <Text style={styles.noAccount} onPress={() => {
-                        navigate('Register');
-                    }}>没有账号？去注册</Text>
-                    <Text style={styles.forgetPassword}>忘记密码</Text>
+                    <Text style={styles.account} onPress={() => {
+                        navigate('Login');
+                    }}>已有账号，去登录</Text>
                 </View>
             </View>
         );
@@ -42,15 +43,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingTop: 10
     },
-    noAccount: {
+    account: {
         fontSize: 14,
         color: "#08c",
-        flex: 3,
+        justifyContent: 'flex-end',
         paddingLeft: 10
-    },
-    forgetPassword: {
-        fontSize: 14,
-        color: "#08c",
-        flex: 1
     }
 });
