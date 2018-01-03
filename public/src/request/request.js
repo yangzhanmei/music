@@ -41,7 +41,10 @@ export const del = async (url) => {
             })
         });
 
-        return {status: res.status}
+        const body = await res.json();
+        const status = res.status;
+
+        return Object.assign({}, {body}, {status})
     } catch (ex) {
 
         return {status: ex.status}
@@ -64,7 +67,10 @@ export const post = async (url, data) => {
             return errHandler(res)
         }
 
-        return {status: res.status}
+        const body = await res.json();
+        const status = res.status;
+
+        return Object.assign({}, {body}, {status})
     } catch (ex) {
 
         return {status: ex.status}
@@ -87,7 +93,10 @@ export const update = async (url, data) => {
             return errHandler(res)
         }
 
-        return {status: res.status}
+        const body = await res.json();
+        const status = res.status;
+
+        return Object.assign({}, {body}, {status})
     } catch (ex) {
 
         return {status: ex.status}

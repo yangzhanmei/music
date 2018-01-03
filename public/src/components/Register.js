@@ -11,17 +11,41 @@ import {
 
 export default class Register extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {username: '', password: "", newPassword: ""};
+    }
+
+    register(navigate) {
+        const username = this.state.username;
+        const password = this.state.password;
+        const newPassword = this.state.newPassword;
+
+        if (password !== newPassword) {
+            alert("两次密码输入不一致！")
+        } else {
+            this.props.register({username, password}, () => {
+
+                if (this.props.isSuccess) {
+                    navigate('Login');
+                }
+            });
+        }
+    }
+
     render() {
+
         const {navigate} = this.props.navigation;
 
         return (
             <View style={styles.container}>
-                <TextInput style={{height: 40}} placeholder="用户名"/>
-                <TextInput style={{height: 40}} placeholder="密码"/>
-                <TextInput style={{height: 40}} placeholder="确认密码"/>
-                <Button onPress={() => {
-                    navigate('Login');
-                }}
+                <TextInput style={{height: 40}} placeholder="用户名"
+                           onChangeText={(username) => this.setState({username})}/>
+                <TextInput style={{height: 40}} placeholder="密码"
+                           onChangeText={(password) => this.setState({password})}/>
+                <TextInput style={{height: 40}} placeholder="确认密码"
+                           onChangeText={(newPassword) => this.setState({newPassword})}/>
+                <Button onPress={this.register.bind(this, navigate)}
                         color='#d74047' title="注册"/>
                 <View style={styles.flexSpace}>
                     <Text style={styles.account} onPress={() => {
