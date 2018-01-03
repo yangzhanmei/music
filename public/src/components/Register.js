@@ -21,7 +21,13 @@ export default class Register extends Component {
         const password = this.state.password;
         const newPassword = this.state.newPassword;
 
-        if (password !== newPassword) {
+        if (username === "") {
+            alert("请输入用户名！")
+        }
+        else if (password === "") {
+            alert("请输入密码！")
+        }
+        else if (password !== newPassword) {
             alert("两次密码输入不一致！")
         } else {
             this.props.register({username, password}, () => {
