@@ -1,94 +1,95 @@
-let status;
+async function errHandler(res) {
+    const body = await res.json();
 
-export const get = (url) => {
+    alert(body.message);
 
-    return fetch(url, {
-        method: "GET",
-        headers: new Headers({
-            'Accept': 'application/json;charset=utf-8',
-            'Content-Type': 'application/json'
-        }),
-    }).then(response => {
-        status = response.status;
+    return {status: res.status}
+}
 
-        return response.json();
-    }).then(json => {
-
-        return {data: json, status}
-    }).catch((err) => {
-        console.log(err);
-
-        return err;
-    });
-};
-
-export const post = (url, data) => {
-
-    return fetch(url, {
-        method: "POST",
-        headers: new Headers({
+export const get = async (url) => {
+    try {
+        const res = await fetch(url, {
+            method: "GET",
+            credentials: 'include',
+            headers: new Headers({
                 'Accept': 'application/json;charset=utf-8',
                 'Content-Type': 'application/json'
-            }
-        ),
-        body: JSON.stringify(data)
-    }).then(response => {
-        status = response.status;
+            })
+        });
 
-        return response ? response.json() : "";
-    }).then(json => {
+        if (!res.ok) {
+            return errHandler(res)
+        }
+        const body = await res.json();
+        const status = res.status;
 
-        return {data: json, status}
-    }).catch((err) => {
-        console.log(err);
+        return Object.assign({}, {body}, {status})
+    } catch (ex) {
 
-        return err;
-    });
+        return {status: ex.status}
+    }
 };
 
 
-export const del = (url) => {
+export const del = async (url) => {
+    try {
+        const res = await fetch(url, {
+            method: "DELETE",
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json;charset=utf-8'
+            })
+        });
 
-    return fetch(url, {
-        method: "DELETE",
-        headers: new Headers({
-                'Accept': 'application/json;charset=utf-8',
-                'Content-Type': 'application/json'
-            }
-        )
-    }).then(response => {
-        status = response.status;
+        return {status: res.status}
+    } catch (ex) {
 
-        return response;
-    }).then(json => {
-
-        return {data: json, status}
-    }).catch((err) => {
-
-        return err;
-    });
+        return {status: ex.status}
+    }
 };
 
+export const post = async (url, data) => {
+    try {
+        const res = await fetch(url, {
+            method: "POST",
+            credentials: 'include',
+            headers: new Headers({
+                'Content-Type': 'application/json;charset=utf-8',
+                'Accept': 'application/json'
+            }),
+            body: JSON.stringify(data)
+        });
 
-export const put = (url, data) => {
+        if (!res.ok) {
+            return errHandler(res)
+        }
 
-    return fetch(url, {
-        method: "PUT",
-        headers: new Headers({
-                'Accept': 'application/json;charset=utf-8',
-                'Content-Type': 'application/json'
-            }
-        ),
-        body: JSON.stringify(data)
-    }).then(response => {
-        status = response.status;
+        return {status: res.status}
+    } catch (ex) {
 
-        return response ? response.json() : "";
-    }).then(json => {
+        return {status: ex.status}
+    }
+};
 
-        return {data: json, status}
-    }).catch((err) => {
+export const update = async (url, data) => {
+    try {
+        const res = await fetch(url, {
+            method: "PUT",
+            credentials: 'include',
+            headers: new Headers({
+                'Content-Type': 'application/json;charset=utf-8',
+                'Accept': 'application/json'
+            }),
+            body: JSON.stringify(data)
+        });
 
-        return err;
-    });
+        if (!res.ok) {
+            return errHandler(res)
+        }
+
+        return {status: res.status}
+    } catch (ex) {
+
+        return {status: ex.status}
+    }
 };

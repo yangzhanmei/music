@@ -4,14 +4,14 @@ import * as action from '../actions/login';
 
 const mapStateToProps = (state) => {
     return {
-        value: state.Login
+        information: state.Login
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        showHello: () => {
-            dispatch(action.getHello())
+        login: (obj, callback) => {
+            dispatch(action.login(obj, callback))
         }
     }
 };

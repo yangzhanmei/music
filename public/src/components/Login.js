@@ -11,16 +11,29 @@ import {
 
 export default class Login extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {userName: '', password: ""};
+    }
+
+    login(navigate) {
+        this.props.login({userName: this.state.userName, password: this.state.password}, () => {
+            if (this.props.information) {
+                navigate('Register');
+            }
+        });
+    };
+
     render() {
         const {navigate} = this.props.navigation;
 
         return (
             <View style={styles.container}>
-                <TextInput style={{height: 40}} placeholder="用户名"/>
-                <TextInput style={{height: 40}} placeholder="密码"/>
-                <Button color='#d74047' title="登录" onPress={() => {
-                    // navigate('HomePage');
-                }}/>
+                <TextInput style={{height: 40}} placeholder="用户名"
+                           onChangeText={(userName) => this.setState({userName})}/>
+                <TextInput style={{height: 40}} placeholder="密码" password="true"
+                           onChangeText={(password) => this.setState({password})}/>
+                <Button color='#d74047' title="登录" onPress={this.login.bind(this, navigate)}/>
                 <View style={styles.flexSpace}>
                     <Text style={styles.noAccount} onPress={() => {
                         navigate('Register');

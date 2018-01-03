@@ -1,7 +1,7 @@
 export default (state = "", action) => {
-    if (action.type === "SHOWHELLO") {
+    if (action.type === "LOGIN") {
 
-        return action.value;
+        return action.information;
     }
 
     return state;

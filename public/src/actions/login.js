@@ -1,27 +1,29 @@
 import * as request from '../request/request';
 import * as StatusCode from '../constants/StatusCode';
 
-const login = (value) => {
+const loginAction = (information) => {
 
     return {
-        type: "SHOWHELLO",
-        value
+        type: "LOGIN",
+        information
     }
 };
 
-const getHello = () => {
+const login = (obj, callback) => {
 
     return dispatch => {
-        request.get("http://192.168.10.151:8080/showHello")
-            .then(result => {
-                if (result.status === StatusCode.OK) {
-                    dispatch(login(result.data));
-                }
-            })
+        (async () => {
+            const res = await request.get(`http://192.168.10.151:8080/user/name/${obj.userName}/pass/${obj.password}`);
+
+            if (res.status === StatusCode.OK) {
+                dispatch(loginAction(res.body));
+                callback();
+            }
+        })()
     }
 };
 
 module.exports = {
-    login,
-    getHello
+    loginAction,
+    login
 };
