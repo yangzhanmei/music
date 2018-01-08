@@ -40,6 +40,10 @@ export default class HomePage extends Component {
         });
     }
 
+    focusText(){
+        navigation.navigate('SearchMusic');
+    }
+
     onMenuItemSelected = (item) => {
         this.setState({
             isOpen: false,
@@ -60,7 +64,8 @@ export default class HomePage extends Component {
                         <TextInput
                             keyboardType='web-search'
                             placeholder='搜索歌曲'
-                            style={styles.inputText}/>
+                            style={styles.inputText}
+                            onFocus={this.focusText.bind(this)}/>
                     </View>
                 </View>
                 <View style={styles.container}>

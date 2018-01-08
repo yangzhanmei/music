@@ -2,9 +2,14 @@ import React, {Component} from 'react';
 import {StackNavigator} from 'react-navigation';
 import Login from '../containers/Login';
 import Register from '../containers/Register';
+import Homepage from '../components/Homepage';
+import SearchMusic from '../components/SearchMusic';
 
 const AppNavigator = StackNavigator(
     {
+        Homepage: {
+            screen: Homepage
+        },
         Login: {
             screen: Login,
             navigationOptions: () => ({
@@ -34,6 +39,9 @@ const AppNavigator = StackNavigator(
                 },
                 headerLeft: null
             })
+        },
+        SearchMusic: {
+            screen: SearchMusic
         },
     }
 );
