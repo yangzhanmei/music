@@ -47,9 +47,9 @@ export default class Register extends Component {
             <View style={styles.container}>
                 <TextInput style={{height: 40}} placeholder="用户名"
                            onChangeText={(username) => this.setState({username})}/>
-                <TextInput style={{height: 40}} placeholder="密码"
+                <TextInput style={{height: 40}} placeholder="密码" secureTextEntry={true}
                            onChangeText={(password) => this.setState({password})}/>
-                <TextInput style={{height: 40}} placeholder="确认密码"
+                <TextInput style={{height: 40}} placeholder="确认密码" secureTextEntry={true}
                            onChangeText={(newPassword) => this.setState({newPassword})}/>
                 <Button onPress={this.register.bind(this, navigate)}
                         color='#d74047' title="注册"/>
