@@ -10,7 +10,6 @@ import {
 } from 'react-native'
 
 const window = Dimensions.get('window');
-const uri = 'http://image18-c.poco.cn/mypoco/myphoto/20160605/09/1735166522016060509185507.png';
 
 export default class Menu extends Component {
 
@@ -18,8 +17,8 @@ export default class Menu extends Component {
         return (
             <ScrollView scrollsToTop={false} style={styles.menu}>
                 <View style={styles.avatarContainer}>
-                    <Image style={styles.avatar} source={{uri: uri}}/>
-                    <Text style={styles.name}>相濡以沫</Text>
+                    <Image style={styles.avatar} source={require('../../images/minguo.jpg')}/>
+                    <Text style={styles.name}>杨战美</Text>
                 </View>
 
                 <View style={styles.itemList}>
