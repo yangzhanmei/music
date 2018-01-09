@@ -15,9 +15,10 @@ const getMusicList = (text, callback) => {
         (async () => {
             // const res = await request.get(`http://192.168.10.151:8080/music/${text}`);
             const res = [
-                "给我一点爱",
-                "哈哈",
-                "嘻嘻"
+                "于文文 - 体面",
+                "冯允澈 - 体面",
+                "陈曦 - 体面（Cover 于文文）",
+                "简弘亦 - 体面"
             ];
             // if (res.status === StatusCode.OK) {
             dispatch(getMusicAction(res));

@@ -8,6 +8,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
+import _sourceData from "../constants/musicListData";
 
 var navigation = null;
 
@@ -15,7 +16,7 @@ export default class MusicList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this._sourceData,
+            data: _sourceData,
             refreshing: false, //初始化不刷新
             text: ''//跳转的行,
         };
@@ -32,8 +33,6 @@ export default class MusicList extends Component {
         );
     }
 
-    //此函数用于为给定的item生成一个不重复的key
-    //若不指定此函数，则默认抽取item.key作为key值。若item.key也不存在，则使用数组下标index。
     _keyExtractor = (item, index) => index;
 
     // itemClick(item, index) {
@@ -66,7 +65,6 @@ export default class MusicList extends Component {
                 <TouchableOpacity style={{flex: 10}}
                                   activeOpacity={0.5}
                                   onPress={() => {
-                                      // alert(navigation)
                                       navigation.navigate('MusicInformation');
                                   }}>
                     <Text style={Styles.item}>{item.music}</Text>
@@ -79,129 +77,22 @@ export default class MusicList extends Component {
         );
     };
 
-    _sourceData = [
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-        },
-
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍",
-            like: false
-
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍"
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍"
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍"
-        },
-        {
-            music: '爱我一次就好',
-            album: "爱我一次就好",
-            artist: "黄丽珍"
-        }
-    ];
-
     render() {
 
         return (
             <View style={Styles.container}>
                 <FlatList style={Styles.flatList}
                           data={this.state.data}
-                    //使用 ref 可以获取到相应的组件
                           ref={(flatList) => this._flatList = flatList}
                           ListFooterComponent={this._footer}//footer尾部组件
                           ItemSeparatorComponent={ItemDivideComponent}//分割线组件
-                    //空数据视图,可以是React Component,也可以是一个render函数，或者渲染好的element。
                           ListEmptyComponent={this.createEmptyView()}
                           keyExtractor={this._keyExtractor}
-                    //是一个可选的优化，用于避免动态测量内容尺寸的开销，不过前提是你可以提前知道内容的高度。
-                    //如果你的行高是固定的，getItemLayout用起来就既高效又简单.
-                    //注意如果你指定了SeparatorComponent，请把分隔线的尺寸也考虑到offset的计算之中
                           getItemLayout={(data, index) => ( {length: 44, offset: (44 + 1) * index, index} )}
-                    //决定当距离内容最底部还有多远时触发onEndReached回调。
-                    //注意此参数是一个比值而非像素单位。比如，0.5表示距离内容最底部的距离为当前列表可见长度的一半时触发。
                           onEndReachedThreshold={0.1}
                           refreshing={this.state.refreshing}
                           onRefresh={() => {
-                              this.setState({refreshing: true})//开始刷新
-                              //这里模拟请求网络，拿到数据，3s后停止刷新
+                              this.setState({refreshing: true})
                               setTimeout(() => {
                                   alert('没有可刷新的内容！');
                                   this.setState({refreshing: false});

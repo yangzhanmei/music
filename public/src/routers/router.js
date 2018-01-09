@@ -4,6 +4,7 @@ import Login from '../containers/Login';
 import Register from '../containers/Register';
 import Homepage from '../components/Homepage';
 import SearchMusic from '../containers/SearchMusic';
+import MusicInformation from '../components/MusicInformation';
 
 const AppNavigator = StackNavigator(
     {
@@ -43,6 +44,9 @@ const AppNavigator = StackNavigator(
         SearchMusic: {
             screen: SearchMusic
         },
+        MusicInformation: {
+            screen: MusicInformation
+        }
     }
 );
 export default AppNavigator;

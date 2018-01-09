@@ -86,7 +86,11 @@ export default class SearchMusic extends Component {
                             value={this.state.text}
                             onChangeText={this.textChange.bind(this)}/>
                     </View>
-                    <Button style={styles.icon} onPress={() => {}}>
+                    <Button style={styles.icon} onPress={() => {
+                        navigation.navigate('MusicInformation', {
+                            music: this.state.text,
+                        });
+                    }}>
                         <Image style={styles.image} source={require('../../images/search.png')}/>
                     </Button>
                 </View>
