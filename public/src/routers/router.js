@@ -3,7 +3,7 @@ import {StackNavigator} from 'react-navigation';
 import Login from '../containers/Login';
 import Register from '../containers/Register';
 import Homepage from '../components/Homepage';
-import SearchMusic from '../components/SearchMusic';
+import SearchMusic from '../containers/SearchMusic';
 
 const AppNavigator = StackNavigator(
     {

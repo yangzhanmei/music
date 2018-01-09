@@ -7,7 +7,8 @@ import {
     TextInput,
     PixelRatio,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    FlatList
 } from 'react-native';
 
 var navigation = null;
@@ -19,7 +20,7 @@ export default class SearchMusic extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {text: '', show: false};
+        this.state = {text: '', show: false, musicList: []};
         navigation = this.props.navigation;
     }
 
@@ -27,6 +28,11 @@ export default class SearchMusic extends Component {
         this.setState({
             show: text !== "" ? true : false,
             text: text
+        });
+        this.props.getMusicList({text: this.state.text}, () => {
+            this.setState({
+                musicList: this.props.musicList !== "" ? this.props.musicList : []
+            });
         });
     }
 
@@ -37,7 +43,32 @@ export default class SearchMusic extends Component {
         });
     }
 
+    _keyExtractor = (item, index) => index;
+
+    createEmptyView() {
+        return (
+            <Text style={{fontSize: 12, alignSelf: 'center'}}>没有数据哦！</Text>
+        );
+    }
+
+    _renderItem = ({item, index}) => {
+        return (
+            <View style={{flexDirection: 'row'}}>
+                <TouchableOpacity style={{flex: 10}}
+                                  activeOpacity={0.5}
+                                  onPress={() => {
+                                      this.setState({
+                                          text: item
+                                      });
+                                  }}>
+                    <Text style={styles.item}>{item}</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    };
+
     render() {
+
         return (
             <View>
                 <View style={styles.topContainer}>
@@ -51,21 +82,23 @@ export default class SearchMusic extends Component {
                             keyboardType='web-search'
                             placeholder='搜索歌曲'
                             style={styles.inputText}
+                            autoFocus={true}
                             value={this.state.text}
                             onChangeText={this.textChange.bind(this)}/>
                     </View>
-                    <Button style={styles.icon} onPress={() => {
-                    }}>
+                    <Button style={styles.icon} onPress={() => {}}>
                         <Image style={styles.image} source={require('../../images/search.png')}/>
                     </Button>
                 </View>
-                {this.state.show ?
-                    <View style={styles.list}>
-                        <Text onPress={this.hideList.bind(this, this.state.text + '网站')}
-                              style={styles.item} numberOfLines={1}>{this.state.text}</Text>
-                    </View>
-                    : null
-                }
+                <FlatList style={styles.flatList}
+                          data={this.state.musicList}
+                          ref={(flatList) => this._flatList = flatList}
+                          ListEmptyComponent={this.createEmptyView()}
+                          keyExtractor={this._keyExtractor}
+                          getItemLayout={(data, index) => ( {length: 44, offset: (44 + 1) * index, index} )}
+                          onEndReachedThreshold={0.1}
+                          renderItem={this._renderItem}
+                />
             </View>
         );
     }
