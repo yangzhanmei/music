@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import ComponentsList from './CommentsList';
 
+var navigation = null;
 const uri = 'http://p1.music.126.net/9K22VVnetJqvjMxje_D7Tg==/109951163104045679.jpg';
 
 export default class MusicInformation extends Component {
@@ -16,11 +17,16 @@ export default class MusicInformation extends Component {
         header: null
     };
 
+    constructor(props) {
+        super(props);
+        navigation = this.props.navigation;
+    }
+
     render() {
         return (
             <View>
                 <View style={styles.topContainer}>
-                    <Button style={styles.icon} onPress={() => this.toggle()}>
+                    <Button style={styles.icon} onPress={() => {navigation.navigate('Homepage');}}>
                         <Image style={styles.image} source={require('../../images/back.png')}/>
                     </Button>
                     <Text style={styles.title}>详情</Text>
