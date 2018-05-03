@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
-import SearchMusic from "../components/SearchMusic";
-import * as action from '../actions/getMusic';
+import SearchMusic from "../../components/SearchMusic";
+import * as action from '../../actions/searchMusic/getMusic';
 
 const mapStateToProps = (state) => {
 

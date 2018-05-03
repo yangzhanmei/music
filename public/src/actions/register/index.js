@@ -1,5 +1,6 @@
-import * as request from '../request/request';
-import * as StatusCode from '../constants/StatusCode';
+import * as request from '../../request/request';
+import * as StatusCode from '../../constants/StatusCode';
+import url from '../../common/url';
 
 const registerAction = (isSuccess) => {
 
@@ -13,7 +14,7 @@ const register = (obj, callback) => {
 
     return dispatch => {
         (async () => {
-            const res = await request.post(`http://192.168.10.151:8080/user`, obj);
+            const res = await request.post(`${url}/user`, obj);
 
             if (res.status === StatusCode.CREATED) {
                 dispatch(registerAction(res.body));

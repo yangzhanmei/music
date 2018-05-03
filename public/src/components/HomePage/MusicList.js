@@ -8,7 +8,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import _sourceData from "../constants/musicListData";
+import _sourceData from "../../constants/musicListData";
 
 var navigation = null;
 
@@ -42,20 +42,28 @@ export default class MusicList extends Component {
 
     show(item) {
         if (!item.like) {
-            return <Image style={Styles.image} source={require('../../images/disliked.png')}/>
+            return <Image style={Styles.image} source={require('../../../images/disliked.png')}/>
         } else {
-            return <Image style={Styles.image} source={require('../../images/liked.png')}/>
+            return <Image style={Styles.image} source={require('../../../images/liked.png')}/>
         }
     }
 
     toggle(index) {
-        var musicList = this.state.data;
-        for (var i = 0; i < musicList.length; i++) {
+        let musicList = this.state.data;
+        let params = {useId: 1, playCount: 1, love: 1};
+
+        for (let i = 0; i < musicList.length; i++) {
             if (index === i) {
+                if (!musicList[i].like) {
+                    this.props.collectMusic({...params, musicId: musicList[i].musicId});
+                } else {
+                    this.props.unCollectMusic({id: musicList[i].id});
+                }
                 musicList[i].like = !musicList[i].like;
             }
         }
-        this.setState({data: musicList})
+
+        this.setState({data: musicList});
     }
 
     _renderItem = ({item, index}) => {
@@ -92,7 +100,7 @@ export default class MusicList extends Component {
                           onEndReachedThreshold={0.1}
                           refreshing={this.state.refreshing}
                           onRefresh={() => {
-                              this.setState({refreshing: true})
+                              this.setState({refreshing: true});
                               setTimeout(() => {
                                   alert('没有可刷新的内容！');
                                   this.setState({refreshing: false});

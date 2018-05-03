@@ -16,6 +16,7 @@ export default class Display extends Component {
     }
 
     render() {
+        const {data, collectMusic} = this.props;
 
         return (
             <View>
@@ -23,7 +24,7 @@ export default class Display extends Component {
                 <View style={{height: 20}}>
                     <Text style={{fontSize: 16, color: "black", padding: 10}}>推荐歌单 ></Text>
                 </View>
-                <MusicList navigation={navigation}/>
+                <MusicList navigation={navigation} data={data} collectMusic={collectMusic}/>
             </View>
         )
     }

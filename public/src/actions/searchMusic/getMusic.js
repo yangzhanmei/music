@@ -1,5 +1,6 @@
-import * as request from '../request/request';
-import * as StatusCode from '../constants/StatusCode';
+import * as request from '../../request/request';
+import * as StatusCode from '../../constants/StatusCode';
+import url from '../../common/url';
 
 const getMusicAction = (musicList) => {
 
@@ -13,7 +14,7 @@ const getMusicList = (text, callback) => {
 
     return dispatch => {
         (async () => {
-            // const res = await request.get(`http://192.168.10.151:8080/music/${text}`);
+            // const res = await request.get(`${url}/music/${text}`);
             const res = [
                 "于文文 - 体面",
                 "冯允澈 - 体面",

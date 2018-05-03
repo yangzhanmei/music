@@ -40,7 +40,7 @@ export default class HomePage extends Component {
         });
     }
 
-    focusText(){
+    focusText() {
         navigation.navigate('SearchMusic');
     }
 
@@ -53,12 +53,13 @@ export default class HomePage extends Component {
 
     render() {
         const menu = <Menu onItemSelected={this.onMenuItemSelected}/>;
+        const {data, collectMusic} = this.props;
 
         return (
             <SideMenu menu={menu} isOpen={this.state.isOpen} onChange={(isOpen) => this.updateMenuState(isOpen)}>
                 <View style={styles.topContainer}>
                     <Button style={styles.icon} onPress={() => this.toggle()}>
-                        <Image style={styles.image} source={require('../../images/icon.png')}/>
+                        <Image style={styles.image} source={require('../../../images/icon.png')}/>
                     </Button>
                     <View style={styles.searchBox}>
                         <TextInput
@@ -69,7 +70,7 @@ export default class HomePage extends Component {
                     </View>
                 </View>
                 <View style={styles.container}>
-                    <Display navigation={navigation}/>
+                    <Display navigation={navigation} data={data} collectMusic={collectMusic}/>
                 </View>
             </SideMenu>
         );

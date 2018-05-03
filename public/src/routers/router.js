@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StackNavigator} from 'react-navigation';
 import Login from '../containers/Login';
 import Register from '../containers/Register';
-import Homepage from '../components/Homepage';
+import Homepage from '../containers/HomePage';
 import SearchMusic from '../containers/SearchMusic';
 import MusicInformation from '../components/MusicInformation';
 

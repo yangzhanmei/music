@@ -17,22 +17,22 @@ export default class Menu extends Component {
         return (
             <ScrollView scrollsToTop={false} style={styles.menu}>
                 <View style={styles.avatarContainer}>
-                    <Image style={styles.avatar} source={require('../../images/minguo.jpg')}/>
+                    <Image style={styles.avatar} source={require('../../../images/minguo.jpg')}/>
                     <Text style={styles.name}>杨战美</Text>
                 </View>
 
                 <View style={styles.itemList}>
                     <Text onPress={() => this.props.onItemSelected('我的歌单')}
                           style={styles.item}>
-                        <Image style={styles.image} source={require('../../images/music.png')}/>  我的歌单
+                        <Image style={styles.image} source={require('../../../images/music.png')}/>  我的歌单
                     </Text>
                     <Text onPress={() => this.props.onItemSelected('个人信息')}
                           style={styles.item}>
-                        <Image style={styles.image} source={require('../../images/user.png')}/>  个人信息
+                        <Image style={styles.image} source={require('../../../images/user.png')}/>  个人信息
                     </Text>
                     <Text onPress={() => this.props.onItemSelected('我的评论')}
                           style={styles.item}>
-                        <Image style={styles.image} source={require('../../images/comment.png')}/>  我的评论
+                        <Image style={styles.image} source={require('../../../images/comment.png')}/>  我的评论
                     </Text>
                 </View>
             </ScrollView>
