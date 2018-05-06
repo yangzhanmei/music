@@ -2,28 +2,28 @@ import * as request from '../../request/request';
 import * as StatusCode from '../../constants/StatusCode';
 import url from '../../common/url';
 
-const registerAction = (isSuccess) => {
+const getMusicListAction = (data) => {
 
     return {
-        type: "REGISTER",
-        isSuccess
+        type: "GETMUSICLIST",
+        data
     }
 };
 
-const register = (obj, callback) => {
+const getMusicList = (obj, callback) => {
+
     return dispatch => {
         (async () => {
-            const res = await request.post(`${url}/user`, obj);
-
+            const res = await request.post(`${url}/collection`,obj);
+            console.log(res);
             if (res.status === StatusCode.CREATED) {
-                dispatch(registerAction(res.body));
+                dispatch(getMusicListAction(res.body));
                 callback();
             }
-        })()
+        })();
     }
 };
 
 module.exports = {
-    registerAction,
-    register
+    getMusicList
 };

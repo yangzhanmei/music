@@ -4,11 +4,13 @@ import NavReducer from './navReducer';
 import Register from './register';
 import SearchMusic from './searchMusic';
 import HomePage from './homePage';
+import MusicInformation from './musicInformation';
 
 export default combineReducers({
     NavReducer,
     Login,
     Register,
     SearchMusic,
-    HomePage
+    HomePage,
+    MusicInformation
 })

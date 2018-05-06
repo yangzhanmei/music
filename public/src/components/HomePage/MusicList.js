@@ -23,6 +23,10 @@ export default class MusicList extends Component {
         navigation = this.props.navigation;
     }
 
+    componentWillMount() {
+        // this.props.getMusicList();
+    }
+
     _footer = () => (
         <Text style={{fontSize: 12, alignSelf: 'center'}}>我也是有底线的！</Text>
     );
@@ -73,7 +77,7 @@ export default class MusicList extends Component {
                 <TouchableOpacity style={{flex: 10}}
                                   activeOpacity={0.5}
                                   onPress={() => {
-                                      navigation.navigate('MusicInformation');
+                                      navigation.navigate('MusicInformation', {id: item.id});
                                   }}>
                     <Text style={Styles.item}>{item.music}</Text>
                     <Text style={Styles.itemInformation}>{item.artist} - {item.album}</Text>

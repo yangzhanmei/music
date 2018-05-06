@@ -53,7 +53,7 @@ export default class HomePage extends Component {
 
     render() {
         const menu = <Menu onItemSelected={this.onMenuItemSelected}/>;
-        const {data, collectMusic} = this.props;
+        const {data, collectMusic, unCollectMusic, getMusicList} = this.props;
 
         return (
             <SideMenu menu={menu} isOpen={this.state.isOpen} onChange={(isOpen) => this.updateMenuState(isOpen)}>
@@ -70,7 +70,8 @@ export default class HomePage extends Component {
                     </View>
                 </View>
                 <View style={styles.container}>
-                    <Display navigation={navigation} data={data} collectMusic={collectMusic}/>
+                    <Display navigation={navigation} data={data} collectMusic={collectMusic}
+                             unCollectMusic={unCollectMusic} getMusicList={getMusicList}/>
                 </View>
             </SideMenu>
         );

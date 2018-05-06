@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
-import SearchMusic from "../../components/SearchMusic";
+import SearchMusic from "../../components/SearchMusic/index";
 import * as action from '../../actions/searchMusic/getMusic';
 
 const mapStateToProps = (state) => {
 
     return {
-        musicList: state.SearchMusic
+        data: state.SearchMusic
     }
 };
 

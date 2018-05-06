@@ -1,6 +1,8 @@
 import {connect} from "react-redux";
 import HomePage from "../../components/HomePage";
 import * as actionCollectMusic from '../../actions/operateMusic/collectMusic';
+import * as actionUnCollectMusic from '../../actions/operateMusic/unCollectMusic';
+import * as actionGetMusicList from '../../actions/operateMusic/getMusicList';
 
 const mapStateToProps = (state) => {
 
@@ -15,8 +17,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actionCollectMusic.collectMusic(obj, callback))
         },
         unCollectMusic: (id, callback) => {
-            dispatch(actionCollectMusic.unCollectMusic(id, callback))
-        }
+            dispatch(actionUnCollectMusic.unCollectMusic(id, callback))
+        },
+        getMusicList: (id, callback) => {
+            dispatch(actionGetMusicList.getMusicList(id, callback))
+        },
     }
 };
 

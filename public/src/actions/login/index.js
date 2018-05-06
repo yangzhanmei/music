@@ -14,7 +14,7 @@ const login = (obj, callback) => {
 
     return dispatch => {
         (async () => {
-            const res = await request.get(`${url}/user/name/${obj.userName}/pass/${obj.password}`);
+            const res = await request.get(`${url}/user?username=${obj.userName}&password=${obj.password}`);
 
             if (res.status === StatusCode.OK) {
                 dispatch(loginAction(res.body));
@@ -25,6 +25,5 @@ const login = (obj, callback) => {
 };
 
 module.exports = {
-    loginAction,
     login
 };

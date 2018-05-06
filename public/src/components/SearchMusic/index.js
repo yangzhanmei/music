@@ -27,11 +27,11 @@ export default class SearchMusic extends Component {
     textChange(text) {
         this.setState({
             show: text !== "" ? true : false,
-            text: text
+            text
         });
-        this.props.getMusicList({text: this.state.text}, () => {
+        this.props.getMusicList({text}, () => {
             this.setState({
-                musicList: this.props.musicList !== "" ? this.props.musicList : []
+                musicList: this.props.data !== "" ? this.props.data : []
             });
         });
     }
@@ -57,11 +57,11 @@ export default class SearchMusic extends Component {
                 <TouchableOpacity style={{flex: 10}}
                                   activeOpacity={0.5}
                                   onPress={() => {
-                                      this.setState({
-                                          text: item
+                                      navigation.navigate('MusicInformation', {
+                                          musicId: item.id,
                                       });
                                   }}>
-                    <Text style={styles.item}>{item}</Text>
+                    <Text style={styles.item}>{item.info}</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -75,7 +75,7 @@ export default class SearchMusic extends Component {
                     <Button style={styles.icon} onPress={() => {
                         navigation.navigate('Homepage');
                     }}>
-                        <Image style={styles.image} source={require('../../images/back.png')}/>
+                        <Image style={styles.image} source={require('../../../images/back.png')}/>
                     </Button>
                     <View style={styles.searchBox}>
                         <TextInput
@@ -87,11 +87,11 @@ export default class SearchMusic extends Component {
                             onChangeText={this.textChange.bind(this)}/>
                     </View>
                     <Button style={styles.icon} onPress={() => {
-                        navigation.navigate('MusicInformation', {
-                            music: this.state.text,
-                        });
+                        // navigation.navigate('MusicInformation', {
+                        //     music: this.state.text,
+                        // });
                     }}>
-                        <Image style={styles.image} source={require('../../images/search.png')}/>
+                        <Image style={styles.image} source={require('../../../images/search.png')}/>
                     </Button>
                 </View>
                 <FlatList style={styles.flatList}

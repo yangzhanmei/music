@@ -14,9 +14,9 @@ const collectMusic = (obj, callback) => {
 
     return dispatch => {
         (async () => {
-            const res = await request.post(`${url}/api/collection`,obj);
+            const res = await request.post(`${url}/collection`,obj);
             console.log(res);
-            if (res.status === StatusCode.OK) {
+            if (res.status === StatusCode.CREATED) {
                 dispatch(collectMusicAction(res.body));
                 callback();
             }

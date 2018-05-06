@@ -8,7 +8,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import _sourceData from "../constants/commentsListData";
+import _sourceData from "../../constants/commentsListData";
 
 export default class CommentsList extends Component {
     constructor(props) {
@@ -36,39 +36,40 @@ export default class CommentsList extends Component {
 
     show(item) {
         if (!item.like) {
-            return <Image style={Styles.likedImage} source={require('../../images/unGesturesLiked.png')}/>
+            return <Image style={Styles.likedImage} source={require('../../../images/unGesturesLiked.png')}/>
         } else {
-            return <Image style={Styles.likedImage} source={require('../../images/gesturesLiked.png')}/>
+            return <Image style={Styles.likedImage} source={require('../../../images/gesturesLiked.png')}/>
         }
     }
 
     toggle(index) {
-        var commentsList = this.state.data;
-        for (var i = 0; i < commentsList.length; i++) {
+        let commentsList = this.state.data;
+        for (let i = 0; i < commentsList.length; i++) {
             if (index === i) {
                 if (commentsList[i].like) {
-                    commentsList[i].likedcount--;
+                    commentsList[i].count--;
                 } else {
-                    commentsList[i].likedcount++;
+                    commentsList[i].count++;
                 }
                 commentsList[i].like = !commentsList[i].like;
             }
         }
-        this.setState({data: commentsList})
+        this.setState({data: commentsList});
     }
 
     _renderItem = ({item, index}) => {
+
         return (
             <View>
                 <View style={{flexDirection: "row"}}>
-                    <Image style={Styles.image} source={{uri: item.avatarurl}}/>
+                    <Image style={Styles.image} source={{uri: item.image}}/>
                     <View style={Styles.comment}>
                         <Text style={Styles.nickname}>
-                            {item.nickname}
+                            {item.username}
                         </Text>
                     </View>
                     <View style={Styles.likedCountView}>
-                        <Text style={Styles.likedCount}>{item.likedcount}</Text>
+                        <Text style={Styles.likedCount}>{item.count}</Text>
                     </View>
                     <Button style={Styles.like} onPress={this.toggle.bind(this, index)}>
                         {this.show(item)}
@@ -82,10 +83,12 @@ export default class CommentsList extends Component {
     };
 
     render() {
+        const commentList = this.props.commentList || [];
+
         return (
             <View style={Styles.container}>
                 <FlatList style={Styles.flatList}
-                          data={this.state.data}
+                          data={commentList}
                     //使用 ref 可以获取到相应的组件
                           ref={(flatList) => this._flatList = flatList}
                           ListFooterComponent={this._footer}//footer尾部组件
@@ -141,8 +144,7 @@ class Button extends Component {
 
 const Styles = StyleSheet.create({
     container: {
-        height: 410,
-        paddingTop: 22
+        height: 375,
     },
     comment: {
         flex: 9,

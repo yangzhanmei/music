@@ -4,7 +4,7 @@ import Login from '../containers/Login';
 import Register from '../containers/Register';
 import Homepage from '../containers/HomePage';
 import SearchMusic from '../containers/SearchMusic';
-import MusicInformation from '../components/MusicInformation';
+import MusicInformation from '../containers/MusicInformation';
 
 const AppNavigator = StackNavigator(
     {
@@ -41,6 +41,9 @@ const AppNavigator = StackNavigator(
                 headerLeft: null
             })
         },
+        // Homepage: {
+        //     screen: Homepage
+        // },
         SearchMusic: {
             screen: SearchMusic
         },
