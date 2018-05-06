@@ -32,22 +32,25 @@ export default class MusicInformation extends Component {
     }
 
     _submit() {
-        const musicId = this.props.data.music.musicId;
+        const musicId = this.props.data.music.id;
+        const params = {
+            musicId, userId: 1, content: this.state.content, nickName: 'name',
+            image: 'http://p1.music.126.net/9K22VVnetJqvjMxje_D7Tg==/109951163104045679.jpg'
+        };
 
         if (!this.state.content) {
-            return alert('留言不能为空')
+            return alert('留言不能为空');
         }
         else {
-            this.props.commentMusic({musicId, isLike: false, count: 0, userId: 1, content: this.state.content}, () => {
-
-            });
+            this.props.commentMusic(params);
             this.setState({content: ''});
         }
     }
 
     render() {
         const data = this.props.data || [];
-        const {music, comment, signer} = data;
+        const {music, comment, singer} = data;
+        const {giveLike, unGiveLike} = this.props;
 
         return (
             <View>
@@ -60,7 +63,7 @@ export default class MusicInformation extends Component {
                     <Text style={styles.title}>详情</Text>
                 </View>
                 <View style={styles.background}>
-                    <Header music={music} signer={signer}/>
+                    <Header music={music} singer={singer}/>
                     <View style={{height: 20}}>
                         <Text style={{fontSize: 13, color: "black", padding: 10}}>精彩评论 ></Text>
                     </View>
@@ -87,7 +90,7 @@ export default class MusicInformation extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <ComponentsList commentList={comment}/>
+                    <ComponentsList commentList={comment} unGiveLike={unGiveLike} giveLike={giveLike}/>
                 </View>
             </View>
         )
@@ -97,14 +100,14 @@ export default class MusicInformation extends Component {
 class Header extends Component {
     render() {
         const music = this.props.music || {};
-        const signer = this.props.signer || '';
+        const singer = this.props.singer || '';
 
         return (
             <View style={styles.header}>
                 <Image style={styles.headerImage} source={{uri: music.image}}/>
                 <View style={styles.font}>
-                    <Text style={styles.name}>{music.musicName}-{music.album}</Text>
-                    <Text style={styles.artist}>{signer}</Text>
+                    <Text style={styles.name}>{music.music}-{music.album}</Text>
+                    <Text style={styles.artist}>{singer}</Text>
                 </View>
             </View>
         )

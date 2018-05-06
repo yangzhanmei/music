@@ -6,7 +6,8 @@ import {
     Text,
     TextInput,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 import _sourceData from "../../constants/musicListData";
 
@@ -28,31 +29,38 @@ export default class MusicList extends Component {
     }
 
     componentWillMount() {
-        // this.props.getMusicList();
+        const userId = 1;
+
+        this.props.getMusicList(userId);
     }
 
     _footer = () => (
-        <Text style={{fontSize: 12, alignSelf: 'center'}}>我也是有底线的！</Text>
+        <View>
+            {/*<Text style={{fontSize: 12, alignSelf: 'center'}}>我也是有底线的！</Text>*/}
+        </View>
     );
 
     createEmptyView() {
         return (
-            <Text style={{fontSize: 40, alignSelf: 'center'}}>还没有数据哦！</Text>
+            <Text style={{fontSize: 13, alignSelf: 'center'}}>还没有数据哦！</Text>
         );
     }
 
     _keyExtractor = (item, index) => index;
 
-    // itemClick(item, index) {
-    //     // const {navigation} = this.props.navigation;
-    //     navigation('MusicInformation');
-    // }
-
-    toggle(index) {
-        let musicList = this.state.data;
-        let params = {useId: 1, playCount: 1, love: 1};
-
-        this.setState({data: musicList});
+    toggle(item) {
+        Alert.alert('', '确定删除？',
+            [
+                {
+                    text: "确定", onPress: () => {
+                    this.props.deleteMusic(item);
+                }
+                },
+                {
+                    text: "取消", onPress: () => {}
+                }
+            ]
+        );
     }
 
     _renderItem = ({item, index}) => {
@@ -65,9 +73,9 @@ export default class MusicList extends Component {
                                       navigation.navigate('MusicInformation', {id: item.id});
                                   }}>
                     <Text style={Styles.item}>{item.music}</Text>
-                    <Text style={Styles.itemInformation}>{item.artist} - {item.album}</Text>
+                    <Text style={Styles.itemInformation}>{item.singer} - {item.album}</Text>
                 </TouchableOpacity>
-                <Button style={Styles.like} onPress={this.toggle.bind(this, index)}>
+                <Button style={Styles.like} onPress={this.toggle.bind(this, item)}>
                     <Image style={Styles.image} source={require('../../../images/delete.png')}/>
                 </Button>
             </View>
@@ -75,6 +83,7 @@ export default class MusicList extends Component {
     };
 
     render() {
+        const musicList = this.props.data || [{}];
 
         return (
             <View>
@@ -91,7 +100,7 @@ export default class MusicList extends Component {
                 </View>
                 <View style={Styles.container}>
                     <FlatList style={Styles.flatList}
-                              data={this.state.data}
+                              data={musicList}
                               ref={(flatList) => this._flatList = flatList}
                               ListFooterComponent={this._footer}//footer尾部组件
                               ItemSeparatorComponent={ItemDivideComponent}//分割线组件
@@ -191,7 +200,6 @@ const Styles = StyleSheet.create({
         paddingBottom: 20,
         flexDirection: 'row',
         backgroundColor: "#333",
-        color: 'white'
     },
     headerImage: {
         width: 80,

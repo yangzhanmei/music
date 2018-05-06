@@ -5,6 +5,8 @@ import Register from './register';
 import SearchMusic from './searchMusic';
 import HomePage from './homePage';
 import MusicInformation from './musicInformation';
+import UserMusicList from './userMusicList';
+import UserCommentsList from './userCommentsList';
 
 export default combineReducers({
     NavReducer,
@@ -12,5 +14,7 @@ export default combineReducers({
     Register,
     SearchMusic,
     HomePage,
-    MusicInformation
+    MusicInformation,
+    UserMusicList,
+    UserCommentsList
 })

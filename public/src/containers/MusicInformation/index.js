@@ -12,11 +12,17 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getMusicInformation: (id) => {
-            dispatch(action.getMusicInformation(id))
+            dispatch(action.getMusicInformation(id));
         },
-        commentMusic: (params, callback) => {
-            dispatch(action.getMusicInformation(params, callback))
-        }
+        commentMusic: (params) => {
+            dispatch(action.commentMusic(params));
+        },
+        giveLike: (params) => {
+            dispatch(action.giveLike(params));
+        },
+        unGiveLike: (params) => {
+            dispatch(action.unGiveLike(params));
+        },
     }
 };
 

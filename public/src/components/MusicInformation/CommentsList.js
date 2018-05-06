@@ -22,13 +22,13 @@ export default class CommentsList extends Component {
 
     _footer = () => (
         <View>
-            <Text style={{fontSize: 12, alignSelf: 'center'}}>我也是有底线的！</Text>
+            {/*<Text style={{fontSize: 12, alignSelf: 'center'}}>我也是有底线的！</Text>*/}
         </View>
     );
 
     createEmptyView() {
         return (
-            <Text style={{fontSize: 40, alignSelf: 'center'}}>还没有数据哦！</Text>
+            <Text style={{fontSize: 12, alignSelf: 'center'}}>还没有数据哦！</Text>
         );
     }
 
@@ -42,19 +42,12 @@ export default class CommentsList extends Component {
         }
     }
 
-    toggle(index) {
-        let commentsList = this.state.data;
-        for (let i = 0; i < commentsList.length; i++) {
-            if (index === i) {
-                if (commentsList[i].like) {
-                    commentsList[i].count--;
-                } else {
-                    commentsList[i].count++;
-                }
-                commentsList[i].like = !commentsList[i].like;
-            }
+    toggle(item) {
+        if (item.like) {
+            this.props.unGiveLike(item);
+        } else {
+            this.props.giveLike(item);
         }
-        this.setState({data: commentsList});
     }
 
     _renderItem = ({item, index}) => {
@@ -65,13 +58,13 @@ export default class CommentsList extends Component {
                     <Image style={Styles.image} source={{uri: item.image}}/>
                     <View style={Styles.comment}>
                         <Text style={Styles.nickname}>
-                            {item.username}
+                            {item.nickName}
                         </Text>
                     </View>
                     <View style={Styles.likedCountView}>
                         <Text style={Styles.likedCount}>{item.count}</Text>
                     </View>
-                    <Button style={Styles.like} onPress={this.toggle.bind(this, index)}>
+                    <Button style={Styles.like} onPress={this.toggle.bind(this, item)}>
                         {this.show(item)}
                     </Button>
                 </View>

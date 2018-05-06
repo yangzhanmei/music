@@ -5,8 +5,8 @@ import Register from '../containers/Register';
 import Homepage from '../containers/HomePage';
 import SearchMusic from '../containers/SearchMusic';
 import MusicInformation from '../containers/MusicInformation';
-import UserMusicList from '../components/UserInformation/MusicList';
-import UserCommentsList from '../components/UserInformation/CommentsList';
+import UserMusicList from '../containers/UserMusicList';
+import UserCommentsList from '../containers/UserCommentsList';
 
 const AppNavigator = StackNavigator(
     {
