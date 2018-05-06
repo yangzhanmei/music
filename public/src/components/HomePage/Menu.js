@@ -22,7 +22,7 @@ export default class Menu extends Component {
                 </View>
 
                 <View style={styles.itemList}>
-                    <Text onPress={() => this.props.onItemSelected('我的歌单')}
+                    <Text onPress={() => this.props.onItemSelected('UserMusicList')}
                           style={styles.item}>
                         <Image style={styles.image} source={require('../../../images/music.png')}/>  我的歌单
                     </Text>
@@ -30,7 +30,7 @@ export default class Menu extends Component {
                           style={styles.item}>
                         <Image style={styles.image} source={require('../../../images/user.png')}/>  个人信息
                     </Text>
-                    <Text onPress={() => this.props.onItemSelected('我的评论')}
+                    <Text onPress={() => this.props.onItemSelected('UserCommentsList')}
                           style={styles.item}>
                         <Image style={styles.image} source={require('../../../images/comment.png')}/>  我的评论
                     </Text>

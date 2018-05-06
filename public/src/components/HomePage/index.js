@@ -49,6 +49,7 @@ export default class HomePage extends Component {
             isOpen: false,
             selectedItem: item,
         });
+        navigation.navigate(item);
     };
 
     render() {
