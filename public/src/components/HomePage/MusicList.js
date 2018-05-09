@@ -8,7 +8,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import _sourceData from "../../constants/musicListData";
+// import _sourceData from "../../constants/musicListData";
 
 var navigation = null;
 
@@ -16,7 +16,7 @@ export default class MusicList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: _sourceData,
+            // data: _sourceData,
             refreshing: false, //初始化不刷新
             text: ''//跳转的行,
         };
@@ -24,50 +24,42 @@ export default class MusicList extends Component {
     }
 
     componentWillMount() {
-        // this.props.getMusicList();
+        const userId = 1;
+
+        this.props.getMusicList(userId);
     }
 
     _footer = () => (
-        <Text style={{fontSize: 12, alignSelf: 'center'}}>我也是有底线的！</Text>
+        <View>
+            {/*<Text style={{fontSize: 12, alignSelf: 'center'}}>我也是有底线的！</Text>*/}
+        </View>
     );
 
     createEmptyView() {
         return (
-            <Text style={{fontSize: 40, alignSelf: 'center'}}>还没有数据哦！</Text>
+            <Text style={{fontSize: 13, alignSelf: 'center'}}>还没有数据哦！</Text>
         );
     }
 
     _keyExtractor = (item, index) => index;
 
-    // itemClick(item, index) {
-    //     // const {navigation} = this.props.navigation;
-    //     navigation('MusicInformation');
-    // }
-
     show(item) {
-        if (!item.like) {
+        if (!item.collected) {
             return <Image style={Styles.image} source={require('../../../images/disliked.png')}/>
         } else {
             return <Image style={Styles.image} source={require('../../../images/liked.png')}/>
         }
     }
 
-    toggle(index) {
-        let musicList = this.state.data;
-        let params = {useId: 1, playCount: 1, love: 1};
+    toggle(item) {
+        const musicId = item.id;
+        const userId = 1;
 
-        for (let i = 0; i < musicList.length; i++) {
-            if (index === i) {
-                if (!musicList[i].like) {
-                    this.props.collectMusic({...params, musicId: musicList[i].musicId});
-                } else {
-                    this.props.unCollectMusic({id: musicList[i].id});
-                }
-                musicList[i].like = !musicList[i].like;
-            }
+        if (!item.collected) {
+            this.props.collectMusic({musicId, userId});
+        } else {
+            this.props.unCollectMusic({musicId, userId});
         }
-
-        this.setState({data: musicList});
     }
 
     _renderItem = ({item, index}) => {
@@ -77,12 +69,12 @@ export default class MusicList extends Component {
                 <TouchableOpacity style={{flex: 10}}
                                   activeOpacity={0.5}
                                   onPress={() => {
-                                      navigation.navigate('MusicInformation', {id: item.id});
+                                      navigation.navigate('MusicInformation', {musicId: item.id});
                                   }}>
                     <Text style={Styles.item}>{item.music}</Text>
-                    <Text style={Styles.itemInformation}>{item.artist} - {item.album}</Text>
+                    <Text style={Styles.itemInformation}>{item.singer} - {item.album}</Text>
                 </TouchableOpacity>
-                <Button style={Styles.like} onPress={this.toggle.bind(this, index)}>
+                <Button style={Styles.like} onPress={this.toggle.bind(this, item)}>
                     {this.show(item)}
                 </Button>
             </View>
@@ -91,10 +83,12 @@ export default class MusicList extends Component {
 
     render() {
 
+        const musicList = this.props.data || [];
+
         return (
             <View style={Styles.container}>
                 <FlatList style={Styles.flatList}
-                          data={this.state.data}
+                          data={musicList}
                           ref={(flatList) => this._flatList = flatList}
                           ListFooterComponent={this._footer}//footer尾部组件
                           ItemSeparatorComponent={ItemDivideComponent}//分割线组件

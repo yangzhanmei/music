@@ -3,7 +3,7 @@ import * as StatusCode from '../../constants/StatusCode';
 import url from '../../common/url';
 import axios from 'axios';
 
-const getMusicAction = (data) => {
+const getMusicListAction = (data) => {
 
     return {
         type: "GETMUSICLIST",
@@ -11,21 +11,34 @@ const getMusicAction = (data) => {
     }
 };
 
-const getMusicList = (params) => {
+const getMusicList = (id) => {
 
     return dispatch => {
         (async () => {
-            const res = await request.get(`${url}/collection/${params}`);
+            const res = await request.get(`${url}/music/recommend/${id}`);
 
             if (res.status === StatusCode.OK) {
-                dispatch(getMusicAction(res.body));
+                dispatch(getMusicListAction(res.body));
             }
-        })()
+        })();
     }
 };
 
-const deleteMusic = (params) => {
+const collectMusic = (params) => {
+    const {userId} = params;
 
+    return dispatch => {
+        (async () => {
+            const res = await request.post(`${url}/collection`, params);
+
+            if (res.status === StatusCode.CREATED) {
+                dispatch(getMusicList(userId));
+            }
+        })();
+    }
+};
+
+const unCollectMusic = (params) => {
     const {userId, musicId} = params;
 
     return dispatch => {
@@ -44,5 +57,6 @@ const deleteMusic = (params) => {
 
 module.exports = {
     getMusicList,
-    deleteMusic
+    collectMusic,
+    unCollectMusic
 };

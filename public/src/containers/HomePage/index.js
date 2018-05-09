@@ -1,26 +1,25 @@
 import {connect} from "react-redux";
 import HomePage from "../../components/HomePage";
-import * as actionCollectMusic from '../../actions/operateMusic/collectMusic';
-import * as actionUnCollectMusic from '../../actions/operateMusic/unCollectMusic';
-import * as actionGetMusicList from '../../actions/operateMusic/getMusicList';
+import * as action from '../../actions/operateMusic';
 
 const mapStateToProps = (state) => {
 
     return {
-        data: state.Homepage
+        data: state.HomePage
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
+
     return {
-        collectMusic: (obj, callback) => {
-            dispatch(actionCollectMusic.collectMusic(obj, callback))
+        collectMusic: (params) => {
+            dispatch(action.collectMusic(params))
         },
-        unCollectMusic: (id, callback) => {
-            dispatch(actionUnCollectMusic.unCollectMusic(id, callback))
+        unCollectMusic: (params) => {
+            dispatch(action.unCollectMusic(params))
         },
-        getMusicList: (id, callback) => {
-            dispatch(actionGetMusicList.getMusicList(id, callback))
+        getMusicList: (params) => {
+            dispatch(action.getMusicList(params))
         },
     }
 };

@@ -1,9 +1,8 @@
-export default (state = {data: {}}, action) => {
-    switch (action.type) {
-        case 'COLLECTMUSIC':
-            return action.data;
-        case 'UNCOLLECTMUSIC':
-            return action.data;
+export default (state = [], action) => {
+
+    if (action.type === 'GETMUSICLIST') {
+
+        return action.data;
     }
 
     return state;

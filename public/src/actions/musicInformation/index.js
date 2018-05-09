@@ -16,7 +16,7 @@ const getMusicInformation = (id) => {
     return dispatch => {
         (async () => {
             const res = await request.get(`${url}/music/${id}`);
-            console.log(res);
+
             if (res.status === StatusCode.OK) {
                 dispatch(getMusicInformationAction(res.body));
             }
