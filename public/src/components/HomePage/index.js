@@ -53,7 +53,7 @@ export default class HomePage extends Component {
     };
 
     render() {
-        const menu = <Menu onItemSelected={this.onMenuItemSelected}/>;
+        const menu = <Menu onItemSelected={this.onMenuItemSelected} navigation={navigation}/>;
         const {data, collectMusic, unCollectMusic, getMusicList} = this.props;
 
         return (

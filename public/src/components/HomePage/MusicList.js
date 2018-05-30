@@ -18,7 +18,8 @@ export default class MusicList extends Component {
         this.state = {
             // data: _sourceData,
             refreshing: false, //初始化不刷新
-            text: ''//跳转的行,
+            text: '',
+            idList: [],
         };
         navigation = this.props.navigation;
     }
@@ -83,7 +84,7 @@ export default class MusicList extends Component {
 
     render() {
 
-        const musicList = this.props.data || [];
+        let musicList = this.props.data || [];
 
         return (
             <View style={Styles.container}>

@@ -134,8 +134,8 @@ class Header extends Component {
                 <View style={Styles.font}>
                     <Text style={Styles.name}>我喜欢的音乐</Text>
                     <View>
-                        <Image style={Styles.avatar} source={require('../../../images/minguo.jpg')}/>
-                        <Text style={Styles.artist}>名字</Text>
+                        <Image style={Styles.avatar} source={{uri:'https://a-ssl.duitang.com/uploads/item/201605/24/20160524132459_h4LRn.thumb.700_0.jpeg'}}/>
+                        <Text style={Styles.artist}>杨战美</Text>
                     </View>
                 </View>
             </View>

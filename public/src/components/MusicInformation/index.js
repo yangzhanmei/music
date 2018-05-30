@@ -34,8 +34,8 @@ export default class MusicInformation extends Component {
     _submit() {
         const musicId = this.props.data.music.id;
         const params = {
-            musicId, userId: 1, content: this.state.content, nickName: 'name',
-            image: 'http://p1.music.126.net/9K22VVnetJqvjMxje_D7Tg==/109951163104045679.jpg'
+            musicId, userId: 1, content: this.state.content, nickName: '杨战美',
+            image: 'https://a-ssl.duitang.com/uploads/item/201605/24/20160524132459_h4LRn.thumb.700_0.jpeg'
         };
 
         if (!this.state.content) {

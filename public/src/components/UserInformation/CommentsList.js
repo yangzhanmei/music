@@ -21,7 +21,7 @@ export default class CommentsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: _sourceData,
+            // data: _sourceData,
             refreshing: false,
             text: ''
         };
@@ -150,8 +150,8 @@ class Header extends Component {
                 <View style={Styles.font}>
                     <Text style={Styles.name}>我的评论</Text>
                     <View>
-                        <Image style={Styles.avatar} source={{uri: comment.image}}/>
-                        <Text style={Styles.artist}>{comment.nickName}</Text>
+                        <Image style={Styles.avatar} source={{uri: 'https://a-ssl.duitang.com/uploads/item/201605/24/20160524132459_h4LRn.thumb.700_0.jpeg'}}/>
+                        <Text style={Styles.artist}>杨战美</Text>
                     </View>
                 </View>
             </View>

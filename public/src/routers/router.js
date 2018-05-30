@@ -10,9 +10,9 @@ import UserCommentsList from '../containers/UserCommentsList';
 
 const AppNavigator = StackNavigator(
     {
-        Homepage: {
-            screen: Homepage
-        },
+        // Homepage: {
+        //     screen: Homepage
+        // },
         Login: {
             screen: Login,
             navigationOptions: () => ({
@@ -43,9 +43,9 @@ const AppNavigator = StackNavigator(
                 headerLeft: null
             })
         },
-        // Homepage: {
-        //     screen: Homepage
-        // },
+        Homepage: {
+            screen: Homepage
+        },
         SearchMusic: {
             screen: SearchMusic
         },
